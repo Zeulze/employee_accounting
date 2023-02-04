@@ -1,0 +1,19 @@
+import "./app-filter.css";
+
+const AppFilter = () => {
+  return (
+    <div className={"btn-group"}>
+      <button className="btn btn-light" type={"button"}>
+        Все сотрудники
+      </button>
+      <button className="btn btn-outline" type={"button"}>
+        На повышение
+      </button>
+      <button className="btn btn-outline" type={"button"}>
+        З/п больше 1200$
+      </button>
+    </div>
+  );
+};
+
+export default AppFilter;

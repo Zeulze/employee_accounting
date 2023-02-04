@@ -1,0 +1,8 @@
+.app-info {
+    padding: var(--padding);
+    background-color: var(--color1);
+    border-radius: var(--borderRadius);
+    color: var(--color2);
+    box-shadow: var(--boxShadow);
+    margin-top: var(--marginTop);
+}

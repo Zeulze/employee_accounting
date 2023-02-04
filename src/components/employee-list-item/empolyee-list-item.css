@@ -1,0 +1,64 @@
+.list-group-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--color1)
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item span {
+    line-height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+    min-width: 550px;
+}
+
+.list-group-item input {
+    line-height: var(--width);
+    font-size: 20px;
+    text-align: center;
+    border: 0;
+}
+
+.list-group-item button {
+    width: var(--width);
+    height: var(--width);
+    margin: 3px;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.list-group-item .fa-check {
+    color: var(--color3);
+}
+
+.list-group-item .fa-trash {
+    color: var(--color5);
+}
+
+.list-group-item .fa-heart {
+    color: var(--color4);
+    width: var(--width);
+    height: var(--width);
+    text-align: center;
+    line-height: 35px;
+    font-size: 16px;
+    transition: 0.3s all;
+    /*transform: translateX(30px);*/
+}
+
+.list-group-item.like .fa-heart {
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+.list-group-item.increase .list-group-item-label,
+.list-group-item.increase .list-group-item-input  {
+    color: var(--color3);
+}
+
+.list-group-item.increase .btn-heart {
+    color: var(--color6);
+}

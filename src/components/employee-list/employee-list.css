@@ -1,0 +1,7 @@
+.app-list {
+    margin-top: var(--marginTop);
+    background-color: var(--color1);
+    border-radius: var(--borderRadius);
+    box-shadow: var(--boxShadow);
+    color: var(--color2);
+}

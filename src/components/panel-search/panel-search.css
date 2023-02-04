@@ -1,0 +1,9 @@
+.panel-search {
+    background-color: var(--color1);
+    color: var(--color2);
+    border-radius: var(--borderRadius);
+    margin-top: var(--marginTop);
+    padding: var(--padding);
+    box-shadow: var(--boxShadow);
+
+}

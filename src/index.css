@@ -1,1 +1,18 @@
+:root {
+    --color1: #3d5a80;
+    --color2: #fff;
+    --color3: #e09f3e;
+    --color4: #e5383b;
+    --color5: black;
+    --color6: #aeaeae;
+    --boxShadow: 15px 15px 30px rgba(0, 0, 0, .15);
+    --borderRadius: 4px;
+    --padding: 25px;
+    --marginTop: 30px;
+    --width: 35px;
+}
 
+body, html {
+    margin: 0;
+    padding: 0;
+}
