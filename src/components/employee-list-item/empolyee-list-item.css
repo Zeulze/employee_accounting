@@ -14,6 +14,10 @@
     min-width: 550px;
 }
 
+.list-group-item span::selection {
+    background-color: white;
+}
+
 .list-group-item input {
     line-height: var(--width);
     font-size: 20px;
