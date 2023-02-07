@@ -13,8 +13,13 @@ const EmployeeAddForm = ({ onUpdate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate(employee.name, employee.salary);
-    setEmployee((employee) => ({ name: "", salary: "" }));
+    if (employee.name.length > 2 && !!employee.salary) {
+      onUpdate(employee.name, employee.salary);
+      setEmployee(() => ({ name: "", salary: "" }));
+    } else {
+      //Затычка вместо валидации
+      alert("Неверно введены имя или зарплата");
+    }
   };
 
   return (

@@ -1,28 +1,32 @@
 import { useState } from "react";
 import "./empolyee-list-item.css";
 
-const EmployeeListItem = ({ name, salary, onDelete }) => {
-  const [increase, setIncrease] = useState(false);
-  const [like, setLike] = useState("");
-  const listClass = "list-group-item justify-content-between d-flex";
+const EmployeeListItem = ({
+  name,
+  salary,
+  onDelete,
+  onToggle,
+  increase,
+  rise,
+}) => {
+  let listClass = "list-group-item justify-content-between d-flex";
   const additionClasses = [" increase ", " like "];
 
-  const handleIncrease = () => {
-    setIncrease((increase) => !increase);
-  };
-  const handleLike = () => {
-    setLike((like) => {
-      return !!like ? "" : additionClasses[1];
-    });
-  };
+  if (increase) {
+    listClass += additionClasses[0];
+  }
+
+  if (rise) {
+    listClass += additionClasses[1];
+  }
 
   return (
-    <li
-      className={
-        increase ? listClass + additionClasses[0] + like : listClass + like
-      }
-    >
-      <span onClick={handleLike} className="list-group-item-label">
+    <li className={listClass}>
+      <span
+        data-toggle={"increase"}
+        onClick={onToggle}
+        className="list-group-item-label"
+      >
         {name}
       </span>
       <input
@@ -34,12 +38,13 @@ const EmployeeListItem = ({ name, salary, onDelete }) => {
         <button
           type={"button"}
           className={"btn-cookie btn-sm"}
-          onClick={handleIncrease}
+          data-toggle={"rise"}
+          onClick={onToggle}
         >
           <i className="fas fa-check"></i>
         </button>
         <button
-          onClick={(id) => onDelete(id)}
+          onClick={onDelete}
           type={"button"}
           className={"btn-trash btn-sm"}
         >
