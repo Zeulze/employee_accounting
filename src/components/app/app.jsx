@@ -8,9 +8,14 @@ import "./app.css";
 import "../panel-search/panel-search.css";
 
 const App = () => {
+  const filters = {
+    ALL_USERS: "ALL_USERS",
+    USERS_ON_RISE: "USERS_ON_RISE",
+    RICH_USERS: "RICH_USERS",
+  };
   const [maxId, setMaxId] = useState(3);
   const [term, setTerm] = useState("");
-  const [filterId, setFilterId] = useState(1);
+  const [filter, setFilter] = useState("ALL_USERS");
   const [data, setData] = useState([
     { name: "Anton Mamon", salary: 3000, rise: false, increase: false, id: 1 },
     { name: "Sargeras", salary: 300, rise: true, increase: false, id: 2 },
@@ -52,7 +57,7 @@ const App = () => {
     );
   };
 
-  const searchEmp = (items, term) => {
+  const searchUser = (items, term) => {
     if (term.length === 0) {
       return items;
     }
@@ -63,24 +68,24 @@ const App = () => {
     );
   };
 
-  const toFilterData = (id) => {
-    if (id === 1) {
-      return searchEmp(data, term);
+  const toFilterData = (filter) => {
+    switch (filter) {
+      case filters.ALL_USERS:
+        return searchUser(data, term);
+      case filters.USERS_ON_RISE:
+        return searchUser(
+          data.filter((item) => item.increase),
+          term
+        );
+      case filters.RICH_USERS:
+        return searchUser(
+          data.filter((item) => item.salary > 1200),
+          term
+        );
     }
-    if (id === 2) {
-      return searchEmp(
-        data.filter((item) => item.increase),
-        term
-      );
-    }
-    if (id === 3)
-      return searchEmp(
-        data.filter((item) => item.salary > 1200),
-        term
-      );
   };
 
-  const visibleData = toFilterData(filterId);
+  const visibleData = toFilterData(filter);
 
   const onUpdateSearch = (term) => {
     setTerm(() => term);
@@ -94,7 +99,7 @@ const App = () => {
       />
       <div className="panel-search">
         <PanelSearch onUpdateSearch={onUpdateSearch} />
-        <AppFilter setId={setFilterId} />
+        <AppFilter setFilter={setFilter} filters={filters} />
       </div>
       <EmployeeList
         data={visibleData}
