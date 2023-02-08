@@ -1,48 +1,32 @@
 import { useState } from "react";
 import "./app-filter.css";
 
-const AppFilter = ({ filters, setFilter }) => {
-  const [buttonPressed, setButtonPressed] = useState(filters.ALL_USERS);
+const AppFilter = ({ filter, onSetFilter }) => {
   const pressedClass = "btn btn-light";
   const unpressedClass = "btn btn-outline-light";
-  const handlerClick = (filter) => {
-    setFilter(() => filter);
-    setButtonPressed(() => filter);
-  };
 
-  return (
-    <div className={"btn-group"}>
+  const buttonsData = [
+    { name: "ALL_USERS", label: "Все сотрудники" },
+    { name: "USERS_ON_RISE", label: "На повышение" },
+    { name: "RICH_USERS", label: "З/п больше 1200$" },
+  ];
+
+  const buttons = buttonsData.map(({ name, label }) => {
+    const active = filter === name;
+    const clazz = active ? pressedClass : unpressedClass;
+    return (
       <button
-        onClick={() => handlerClick(filters.ALL_USERS)}
-        className={
-          buttonPressed === filters.ALL_USERS ? pressedClass : unpressedClass
-        }
         type={"button"}
+        className={clazz}
+        key={name}
+        onClick={() => onSetFilter(name)}
       >
-        Все сотрудники
+        {label}
       </button>
-      <button
-        onClick={() => handlerClick(filters.USERS_ON_RISE)}
-        className={
-          buttonPressed === filters.USERS_ON_RISE
-            ? pressedClass
-            : unpressedClass
-        }
-        type={"button"}
-      >
-        На повышение
-      </button>
-      <button
-        onClick={() => handlerClick(filters.RICH_USERS)}
-        className={
-          buttonPressed === filters.RICH_USERS ? pressedClass : unpressedClass
-        }
-        type={"button"}
-      >
-        З/п больше 1200$
-      </button>
-    </div>
-  );
+    );
+  });
+
+  return <div className={"btn-group"}>{buttons}</div>;
 };
 
 export default AppFilter;

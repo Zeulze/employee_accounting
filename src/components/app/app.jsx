@@ -8,11 +8,6 @@ import "./app.css";
 import "../panel-search/panel-search.css";
 
 const App = () => {
-  const filters = {
-    ALL_USERS: "ALL_USERS",
-    USERS_ON_RISE: "USERS_ON_RISE",
-    RICH_USERS: "RICH_USERS",
-  };
   const [maxId, setMaxId] = useState(3);
   const [term, setTerm] = useState("");
   const [filter, setFilter] = useState("ALL_USERS");
@@ -70,14 +65,14 @@ const App = () => {
 
   const toFilterData = (filter) => {
     switch (filter) {
-      case filters.ALL_USERS:
+      case "ALL_USERS":
         return searchUser(data, term);
-      case filters.USERS_ON_RISE:
+      case "USERS_ON_RISE":
         return searchUser(
           data.filter((item) => item.increase),
           term
         );
-      case filters.RICH_USERS:
+      case "RICH_USERS":
         return searchUser(
           data.filter((item) => item.salary > 1200),
           term
@@ -91,6 +86,10 @@ const App = () => {
     setTerm(() => term);
   };
 
+  const onSetFilter = (filter) => {
+    setFilter(() => filter);
+  };
+
   return (
     <div className={"app"}>
       <AppInfo
@@ -99,7 +98,7 @@ const App = () => {
       />
       <div className="panel-search">
         <PanelSearch onUpdateSearch={onUpdateSearch} />
-        <AppFilter setFilter={setFilter} filters={filters} />
+        <AppFilter onSetFilter={onSetFilter} filter={filter} />
       </div>
       <EmployeeList
         data={visibleData}
