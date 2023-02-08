@@ -16,9 +16,6 @@ const EmployeeAddForm = ({ onUpdate }) => {
     if (employee.name.length > 2 && !!employee.salary) {
       onUpdate(employee.name, employee.salary);
       setEmployee(() => ({ name: "", salary: "" }));
-    } else {
-      //Затычка вместо валидации
-      alert("Неверно введены имя или зарплата");
     }
   };
 

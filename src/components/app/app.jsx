@@ -9,6 +9,8 @@ import "../panel-search/panel-search.css";
 
 const App = () => {
   const [maxId, setMaxId] = useState(3);
+  const [term, setTerm] = useState("");
+  const [filterId, setFilterId] = useState(1);
   const [data, setData] = useState([
     { name: "Anton Mamon", salary: 3000, rise: false, increase: false, id: 1 },
     { name: "Sargeras", salary: 300, rise: true, increase: false, id: 2 },
@@ -50,6 +52,40 @@ const App = () => {
     );
   };
 
+  const searchEmp = (items, term) => {
+    if (term.length === 0) {
+      return items;
+    }
+
+    return items.filter(
+      (item) =>
+        item.name.toLowerCase().trim().indexOf(term.toLowerCase().trim()) > -1
+    );
+  };
+
+  const toFilterData = (id) => {
+    if (id === 1) {
+      return searchEmp(data, term);
+    }
+    if (id === 2) {
+      return searchEmp(
+        data.filter((item) => item.increase),
+        term
+      );
+    }
+    if (id === 3)
+      return searchEmp(
+        data.filter((item) => item.salary > 1200),
+        term
+      );
+  };
+
+  const visibleData = toFilterData(filterId);
+
+  const onUpdateSearch = (term) => {
+    setTerm(() => term);
+  };
+
   return (
     <div className={"app"}>
       <AppInfo
@@ -57,10 +93,14 @@ const App = () => {
         checkIncrease={data.filter((item) => item.increase).length}
       />
       <div className="panel-search">
-        <PanelSearch />
-        <AppFilter />
+        <PanelSearch onUpdateSearch={onUpdateSearch} />
+        <AppFilter setId={setFilterId} />
       </div>
-      <EmployeeList data={data} onDelete={onDelete} onToggle={onToggle} />
+      <EmployeeList
+        data={visibleData}
+        onDelete={onDelete}
+        onToggle={onToggle}
+      />
       <EmployeeAddForm onUpdate={onUpdate} />
     </div>
   );
